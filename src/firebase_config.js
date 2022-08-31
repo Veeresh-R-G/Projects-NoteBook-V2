@@ -1,6 +1,5 @@
 
 import { initializeApp } from 'firebase/app'
-
 import {
     getFirestore, collection
 } from 'firebase/firestore'
@@ -27,10 +26,11 @@ const app = initializeApp(firebaseConfig)
 const dataBase = getFirestore(app);
 export const auth = getAuth(app);
 
-
 //Google Auth Provider
 export const Googleprovider = new GoogleAuthProvider();
 export const GithubProvider = new GithubAuthProvider();
+//Collection reference
+export const colRef = collection(dataBase, 'users')
 
 // export const signInWithGoogle = () => {
 //     signInWithPopup(auth, provider)
@@ -41,8 +41,7 @@ export const GithubProvider = new GithubAuthProvider();
 //             console.log(err);
 //         }))
 // }
-//Collection reference
-export const colRef = collection(dataBase, 'users')
+
 
 
 

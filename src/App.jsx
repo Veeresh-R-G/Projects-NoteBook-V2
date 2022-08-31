@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import Header from "./Components/Header";
 import Home from "./Pages/Home";
+import Test from "./Components/Test";
+import User from "./Pages/User";
 function App() {
 
   // const [docs, setDocs] = useState([]);
@@ -34,8 +36,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<SignIn />}></Route>
-          <Route path="/user/:name" element={<Form />}></Route>
-
+          <Route path="/user/:name" element={<User />}></Route>
+          <Route path="/test" element={<Test />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

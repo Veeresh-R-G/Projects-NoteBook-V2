@@ -4,6 +4,8 @@ import { auth, Googleprovider, GithubProvider } from "../../src/firebase_config"
 import { useState, } from 'react';
 import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from "react-router";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignIn = () => {
 
@@ -11,6 +13,14 @@ const SignIn = () => {
     let [authGithubDets, setGithubDets] = useState({});
 
     let navigate = useNavigate();
+
+
+
+    if (localStorage) {
+        navigate(`/user/${localStorage.firstName}`)
+    }
+
+
     const signInWithGitHub = () => {
         signInWithPopup(auth, GithubProvider).
             then((res) => {
@@ -45,8 +55,24 @@ const SignIn = () => {
                 localStorage.setItem("token", res._tokenResponse.idToken)
                 localStorage.setItem("Name", res._tokenResponse.displayName)
                 localStorage.setItem("Photo", res._tokenResponse.photoUrl)
+                localStorage.setItem("firstName", res._tokenResponse.firstName)
 
-                navigate(`/user/${res._tokenResponse.firstName}`)
+
+                toast.success('🦄 Wow so easy!', {
+                    position: "top-right",
+                    autoClose: 10000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+                setTimeout(() => {
+                    navigate(`/user/${res._tokenResponse.firstName}`)
+                }, 4500);
+
+
 
             })
             .catch((err) => {
@@ -56,7 +82,7 @@ const SignIn = () => {
 
     // console.log(authDets)
     return (
-        <div className="text-center px-9 lg:px-[300px]">
+        <div className="text-center mt-10 px-9 lg:px-[300px]">
             <div className="signIn bg-white text-center rounded-xl pb-10">
 
 
@@ -95,7 +121,6 @@ const SignIn = () => {
                          hover:bg-blue-600 hover:text-white
                          "> <h1 className="my-auto md:mr-6 mx-auto">Sign in With Google </h1><div><FcGoogle className="h-10 w-10 bg-white rounded-full" /></div></button>
 
-
                     <button disabled onClick={signInWithGitHub}
 
                         className=" px-6 py-2 border-2 flex
@@ -112,6 +137,7 @@ const SignIn = () => {
 
 
 
+                <ToastContainer />
             </div>
         </div>
     );
