@@ -1,5 +1,6 @@
 # Projects-NoteBook-V2
 
-### Issues To resolve
+### Pending Tasks
 
-- [ ] Response from Firebase :fire: 
+- [ ] Resolve Response from Firebase :fire: 
+- [ ] Yet to Host
